@@ -1,0 +1,16 @@
+[Unit]
+Description=notify-me.service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=exec su daniel -c /home/daniel/coding/cgi/notify/py/NotifyServer.py
+ExecStop=killall -9 $MAINPID
+Restart=always
+RestartSec=5
+TimeoutSec=60
+RuntimeMaxSec=infinity
+PIDFile=/tmp/notify-me.pid
+
+[Install]
+WantedBy=multi-user.target
